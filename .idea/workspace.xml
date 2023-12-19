@@ -15,6 +15,7 @@
       <change afterPath="$PROJECT_DIR$/controllers/userController.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/database/config.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/helpers/tokenHelper.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helpers/utils.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/middleware/authMiddleware.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/models/foodModel.go" afterDir="false" />
