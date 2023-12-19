@@ -5,35 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a04e23eb-000b-4102-9fcf-4ea320cf3858" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/controllers/foodController.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/invoiceController.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/menuController.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/noteController.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/orderController.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/orderItemController.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/tableController.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/userController.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/config.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/helpers/tokenHelper.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/helpers/utils.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware/authMiddleware.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/foodModel.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/invoiceModel.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/menuModel.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/noteModel.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/orderItemModel.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/orderModel.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/tableModel.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/userModel.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/foodRouter.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/invoiceRouter.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/menuRouter.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/noteRouter.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/orderItemRouter.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/orderRouter.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/tableRouter.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/userRouter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +72,10 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="update 1" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
