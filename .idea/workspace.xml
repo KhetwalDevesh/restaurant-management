@@ -75,7 +75,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="update 1" />
+    <MESSAGE value="added gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="added gitignore" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
