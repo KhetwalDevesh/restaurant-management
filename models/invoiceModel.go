@@ -20,8 +20,8 @@ const (
 )
 
 type Invoice struct {
-	ID             uint          `gorm:"primary_key" json:"id"`
-	OrderID        uint          `gorm:"not null" json:"orderID"`
+	ID             uint32        `gorm:"primary_key" json:"id"`
+	OrderID        uint32        `gorm:"not null" json:"orderID"`
 	PaymentMethod  PaymentMethod `gorm:"not null" json:"paymentMethod" validate:"oneof=card cash"`
 	PaymentStatus  PaymentStatus `gorm:"not null" json:"paymentStatus" validate:"oneof=pending paid"`
 	PaymentDueDate time.Time     `json:"paymentDueDate"`

@@ -59,15 +59,20 @@ func GetFood() gin.HandlerFunc {
 func CreateFood() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var _, cancel = context.WithTimeout(context.Background(), 100*time.Second)
-		var menu models.Menu
-		var food models.Food
+		isUserAdmin, _ := c.Get("isAdmin")
+		if isUserAdmin == false {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "You need to be an admin to create a food"})
+			return
+		}
+		var menu *models.Menu
+		var food *models.Food
 
 		if err := c.BindJSON(&food); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
 
-		err := config.GetDB().Model(models.Food{}).Where("menu_id = ?", food.MenuId).First(&menu).Error
+		err := config.GetDB().Where("id = ?", food.MenuId).First(&menu).Error
 		defer cancel()
 		if err != nil {
 			msg := fmt.Sprintf("menu was not found")
@@ -78,7 +83,15 @@ func CreateFood() gin.HandlerFunc {
 		food.UpdatedAt = time.Now()
 		var num = toFixed(food.Price, 2)
 		food.Price = num
-		err = config.GetDB().Model(&models.Food{}).Create(food).Error
+
+		// validate food data before storing it in db
+		if err := validate.Struct(food); err != nil {
+			msg := fmt.Sprintf("Food data invalidated : %v", err.Error())
+			c.JSON(http.StatusInternalServerError, gin.H{"error": msg})
+			return
+		}
+
+		err = config.GetDB().Model(&models.Food{}).Create(&food).Error
 		if err != nil {
 			msg := fmt.Sprintf("Error creating the food")
 			c.JSON(http.StatusInternalServerError, gin.H{"error": msg})
@@ -129,7 +142,7 @@ func UpdateFood() gin.HandlerFunc {
 		}
 		var menuForFoodToBeUpdated *models.Menu
 		if food.MenuId != 0 {
-			if err := config.GetDB().Model(&models.Menu{}).Where("menu_id = ?", food.MenuId).First(&menuForFoodToBeUpdated); err != nil {
+			if err := config.GetDB().Model(&models.Menu{}).Where("menu_id = ?", food.MenuId).First(&menuForFoodToBeUpdated).Error; err != nil {
 				if errors.Is(err, gorm.ErrRecordNotFound) {
 					c.JSON(http.StatusNotFound, gin.H{"error": "Menu not found"})
 					return
@@ -141,6 +154,13 @@ func UpdateFood() gin.HandlerFunc {
 		}
 
 		existingFood.UpdatedAt = time.Now()
+
+		// validate food data before saving it
+		if err := validate.Struct(existingFood); err != nil {
+			msg := fmt.Sprintf("Food data invalidated : %v", err.Error())
+			c.JSON(http.StatusInternalServerError, gin.H{"error": msg})
+			return
+		}
 
 		// Save changes to the database
 		if err := config.GetDB().Save(&existingFood).Error; err != nil {

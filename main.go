@@ -1,6 +1,7 @@
 package main
 
 import (
+	config "github.com/KhetwalDevesh/restaurant-management/database"
 	"github.com/KhetwalDevesh/restaurant-management/middleware"
 	"github.com/KhetwalDevesh/restaurant-management/routes"
 	"github.com/gin-gonic/gin"
@@ -8,14 +9,15 @@ import (
 )
 
 func main() {
-	port := os.Getenv("PORT")
+	port := os.Getenv("SERVER_PORT")
 	if port == "" {
 		port = "8000"
 	}
+	config.ConfigDB()
 	router := gin.New()
 	router.Use(gin.Logger())
 	routes.UserRoutes(router)
-	routes.Use(middleware.Authentication())
+	router.Use(middleware.Authentication())
 	routes.FoodRoutes(router)
 	routes.InvoiceRoutes(router)
 	routes.MenuRoutes(router)

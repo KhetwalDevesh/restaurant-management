@@ -40,10 +40,29 @@ func GetMenu() gin.HandlerFunc {
 func CreateMenu() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var _, cancel = context.WithTimeout(context.Background(), 100*time.Second)
-		var menu models.Menu
+		isUserAdmin, _ := c.Get("isAdmin")
+		if isUserAdmin == false {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "You need to be an admin to create a menu"})
+			return
+		}
+		var menu *models.Menu
+		if err := c.BindJSON(&menu); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+		menu.StartDate = time.Now()
+		menu.EndDate = time.Now().AddDate(0, 1, 0)
 		menu.CreatedAt = time.Now()
 		menu.UpdatedAt = time.Now()
-		err := config.GetDB().Model(&models.Food{}).Create(menu).Error
+
+		// validate menu data before storing it in db
+		if err := validate.Struct(menu); err != nil {
+			msg := fmt.Sprintf("Menu data invalidated : %v", err.Error())
+			c.JSON(http.StatusInternalServerError, gin.H{"error": msg})
+			return
+		}
+
+		err := config.GetDB().Model(&models.Menu{}).Create(menu).Error
 		if err != nil {
 			msg := fmt.Sprintf("Error creating the menu")
 			c.JSON(http.StatusInternalServerError, gin.H{"error": msg})
@@ -96,6 +115,13 @@ func UpdateMenu() gin.HandlerFunc {
 		}
 
 		existingMenu.UpdatedAt = time.Now()
+
+		// validate menu data before storing it in db
+		if err := validate.Struct(existingMenu); err != nil {
+			msg := fmt.Sprintf("Menu data invalidated : %v", err.Error())
+			c.JSON(http.StatusInternalServerError, gin.H{"error": msg})
+			return
+		}
 
 		// Save changes to the database
 		if err := config.GetDB().Save(&existingMenu).Error; err != nil {

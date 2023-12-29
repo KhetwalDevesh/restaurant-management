@@ -42,14 +42,24 @@ func GetOrder() gin.HandlerFunc {
 func CreateOrder() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var _, cancel = context.WithTimeout(context.Background(), 100*time.Second)
-		var table *models.Table
-		var order *models.Order
+		var table models.Table
+		var order models.Order
+		// orderDate is not send, current time and date is assigned
+		order.OrderDate = time.Now()
+		// assign the userId to the order to be created
+		userId, userIdExists := c.Get("uid")
+		if userIdExists {
+			order.UserId = userId.(uint32)
+		}
+
 		if err := c.BindJSON(&order); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
+
+		// check if the table exists from where the order is made
 		if order.TableId != 0 {
-			err := config.GetDB().Model(models.Table{}).Where("table_id = ?", order.TableId).First(&table).Error
+			err := config.GetDB().Model(models.Table{}).Where("id = ?", order.TableId).First(&table).Error
 			defer cancel()
 			if err != nil {
 				msg := fmt.Sprintf("table was not found")
@@ -57,9 +67,18 @@ func CreateOrder() gin.HandlerFunc {
 				return
 			}
 		}
+
 		order.CreatedAt = time.Now()
 		order.UpdatedAt = time.Now()
-		err := config.GetDB().Model(&models.Order{}).Create(order).Error
+
+		// validate order data before storing it in db
+		if err := validate.Struct(order); err != nil {
+			msg := fmt.Sprintf("Order data invalidated : %v", err.Error())
+			c.JSON(http.StatusInternalServerError, gin.H{"error": msg})
+			return
+		}
+
+		err := config.GetDB().Model(&models.Order{}).Create(&order).Error
 		if err != nil {
 			msg := fmt.Sprintf("Error creating the order")
 			c.JSON(http.StatusInternalServerError, gin.H{"error": msg})
@@ -90,7 +109,7 @@ func UpdateOrder() gin.HandlerFunc {
 
 		var tableForOrderToBeUpdated *models.Table
 		if order.TableId != 0 {
-			if err := config.GetDB().Model(&models.Table{}).Where("table_id = ?", order.TableId).First(&tableForOrderToBeUpdated); err != nil {
+			if err := config.GetDB().Model(&models.Table{}).Where("table_id = ?", order.TableId).First(&tableForOrderToBeUpdated).Error; err != nil {
 				if errors.Is(err, gorm.ErrRecordNotFound) {
 					c.JSON(http.StatusNotFound, gin.H{"error": "Table not found"})
 					return
@@ -103,6 +122,13 @@ func UpdateOrder() gin.HandlerFunc {
 
 		existingOrder.UpdatedAt = time.Now()
 
+		// validate order data before storing it in db
+		if err := validate.Struct(existingOrder); err != nil {
+			msg := fmt.Sprintf("Order data invalidated : %v", err.Error())
+			c.JSON(http.StatusInternalServerError, gin.H{"error": msg})
+			return
+		}
+
 		// Save changes to the database
 		if err := config.GetDB().Save(&existingOrder).Error; err != nil {
 			msg := "Order update failed"
@@ -112,4 +138,14 @@ func UpdateOrder() gin.HandlerFunc {
 
 		c.JSON(http.StatusOK, gin.H{"message": "Order updated successfully"})
 	}
+}
+
+func OrderItemOrderCreator(order models.Order) uint32 {
+	// Use GORM to create the order record
+	db := config.GetDB()
+	order.CreatedAt = time.Now()
+	order.UpdatedAt = time.Now()
+	db.Create(&order)
+	// Convert the order ID to hex format
+	return order.ID
 }

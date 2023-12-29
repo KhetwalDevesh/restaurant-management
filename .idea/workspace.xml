@@ -4,8 +4,32 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a04e23eb-000b-4102-9fcf-4ea320cf3858" name="Changes" comment="">
+    <list default="true" id="a04e23eb-000b-4102-9fcf-4ea320cf3858" name="Changes" comment="updated gitignore">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/foodController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/foodController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/invoiceController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/invoiceController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/menuController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/menuController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/noteController.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/orderController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/orderController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/orderItemController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/orderItemsController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/tableController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/tableController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/userController.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/userController.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/database/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/tokenHelper.go" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/tokenHelper.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/authMiddleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/authMiddleware.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/foodModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/foodModel.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/invoiceModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/invoiceModel.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/menuModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/menuModel.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/noteModel.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/orderItemModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/orderItemModel.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/orderModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/orderModel.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/userModel.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/userModel.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/invoiceRouter.go" beforeDir="false" afterPath="$PROJECT_DIR$/routes/invoiceRouter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/noteRouter.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +100,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update 1" />
     <MESSAGE value="added gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="added gitignore" />
+    <MESSAGE value="updated gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated gitignore" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
